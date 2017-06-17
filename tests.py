@@ -1,23 +1,3 @@
-# -*- coding: cp1252 -*-
-"""
-# Example usage
-from genetic import *
-target = 371
-p_count = 100
-i_length = 6
-i_min = 0
-i_max = 100
-p = population(p_count, i_length, i_min, i_max)
-fitness_history = [grade(p, target),]
-for i in xrange(100):
-    p = evolve(p, target)
-    fitness_history.append(grade(p, target))
-
-for datum in fitness_history:
-   print datum
-
-minimo é -9 p/ z=x+3
-"""
 from random import randint, random
 from operator import add
 
@@ -87,7 +67,7 @@ def translate(value, leftMin, leftMax):
     # Convert the 0-1 range into a value in the right range.
     return int(valueScaled * 100)
 
-def evolve(pop, elitism=0.25, breed_rate=0.7, mutate=0.01):
+def evolve(pop, elitism=0.25, breed_rate=0.70, mutate=0.01):
     graded = [ (fitness(x), x) for x in pop]
     pop_by_fitness = [ x for x in sorted(graded)]
     pop_without_fitness=[ x[1] for x in sorted(graded)]
@@ -129,9 +109,7 @@ def evolve(pop, elitism=0.25, breed_rate=0.7, mutate=0.01):
     #print "end of pop"
 
 
-
     return next_pop
-
 
 
 p_count = 100
@@ -140,7 +118,7 @@ i_max = 100
 p = population(p_count, i_min, i_max)
 fitness_history = [grade(p),]
 count=0
-while grade(p) != -9:
+while grade(p) > -8.9:
     p = evolve(p)
     fitness_history.append(grade(p))
     count+=1
